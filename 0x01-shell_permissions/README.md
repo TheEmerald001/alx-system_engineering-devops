@@ -10,5 +10,5 @@
 9. chmod 753 hello - this script gives execute permissions to all users, allowing the owner to read and write and the group users to read while other users can write.
 10. chmod --reference olleh==hello - a mirror script to set the mode of hello same as that of olleh 
 11. chmod -R +X . - lists all current directory content as readable and makes them executable
-12. 
+12. mkdir -m 251 my_dir - script to make a directory with preset given permissions
 13. chgrp school hello - change user group of file hello to school

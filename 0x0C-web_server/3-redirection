@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
-# Install a nginx web server listening on port 80.
-# Also, configure a directive of the Nginx server
+# configure a directive of the Nginx server
 # to redirect to another page with 301 HTTP Code
-#
 
 link="https://www.youtube.com/watch?v=QH2-TGUlwu4"
 new_conf="server_name _;\n\trewrite ^/redirect_me/$ $link permanent;"

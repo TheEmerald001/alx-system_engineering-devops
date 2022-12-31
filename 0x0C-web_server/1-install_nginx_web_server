@@ -7,16 +7,3 @@ sudo ufw allow "Nginx HTTP"
 sudo chown -R $USER:$USER /var/www/html/index.nginx-debian.html
 sudo echo "Hello World!" > /var/www/html/index.nginx-debian.html
 sudo service nginx restart
-
-# old script
-# #!/usr/bin/env bash
-# # Install a nginx web server listening on port 80.
-# #
-# # Also, when querying nginx at its root / with a GET
-# # request, it returns a page that contains the string
-# # 'Hello World!'.
-# sudo apt-get update
-# sudo apt-get install nginx
-# sudo ufw allow 'Nginx HTTP'
-# sudo echo "Hello World!" > /var/www/html/index.nginx-debian.html
-

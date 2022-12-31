@@ -1,24 +1,32 @@
 #!/usr/bin/env bash
-# Install a nginx web server listening on port 80.
-#
-# Configures a directive of the Nginx server
-# to redirect to another page with 301 HTTP Code
-#
-# Configures a custom 404 page that contains the string
-# 'Ceci n'est pas une page'.
-#
+# Configures my nginx server to have a custom 404 page
 
-link="https://www.youtube.com/watch?v=QH2-TGUlwu4"
-new_conf="server_name _;\n\trewrite ^/redirect_me/$ $link permanent;"
-location_error="location = /404.html {\n\t\troot /var/www/html/;\n\t\tinternal;\n"
-error_directive="error_page 404 /404.html;\n\t$location_error"
-error_404="}\n\n\t$error_directive\t}"
+sudo apt-get update && sudo apt-get install nginx -y
 
-apt update
-apt install -y nginx
-ufw allow 'Nginx HTTP'
-echo "Hello World!" > /var/www/html/index.html
+sudo chown -R "$USER":"$USER" /var/www/html/index.nginx-debian.html
+sudo chown -R "$USER":"$USER" /etc/nginx/sites-available/default
+sudo chown -R "$USER":"$USER" /var/www/html
+
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
 echo "Ceci n'est pas une page" > /var/www/html/404.html
-sed -i "s|server_name\ _;|$new_conf|" /etc/nginx/sites-available/default
-sed -i "0,/}/ s|}|$error_404|" /etc/nginx/sites-available/default
-service nginx restart
+
+NotFound=\
+"server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	root /var/www/html;
+	index index.html index.htm index.nginx-debian.html;
+	server_name _;
+	location /redirect_me {
+		return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+	}
+ 	error_page 404 /404.html;
+    	location /404 {
+      		root /var/www/html;
+      		internal;
+    	}
+}"
+
+echo -e "$NotFound" > /etc/nginx/sites-available/default
+
+sudo service nginx restart

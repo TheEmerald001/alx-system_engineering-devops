@@ -22,7 +22,7 @@ backend web-servers
 	server 13540-web-02 35.174.208.155:80 check" >> /etc/haproxy/haproxy.cfg
 
 #Enable haproxy to be managed via init script
-systemctl enable haproxy
+sudo systemctl enable haproxy
 
 #start haproxy
-systemctl start haproxy
+sudo systemctl start haproxy

@@ -37,8 +37,8 @@ defaults
 
 listen web-servers
         bind *:80
-        bind *:443 ssl crt /etc/haproxy/certs/emerald-builds.tech.pem
+        bind *:443 ssl crt /etc/haproxy/certs/emerald-builds.tech-0001.pem
         http-request redirect scheme https unless { ssl_fc }
         balance roundrobin
-        server 13540-web-01 52.86.242.93:80 check
-        server 13540-web-02 35.174.208.155:80 check
+        server 13540-web-01 54.226.29.105:80 check
+        server 13540-web-02 54.236.52.173:80 check

@@ -1,6 +1,6 @@
-# Apache returns 500 error due to bug in php module
+# fix wp on trying to initialize
 
-exec { 'Fix wp-settings.php':
-  command => '/bin/sed -i s/.phpp/.php/ var/www/html/wp-settings.php',
-  path    => 'usr/local/bin:usr/bin'
+exec { 'fix-wordpress':
+  command => "/bin/sed -i /var/www/html/wp-settings.php \
+   -e 's/class-wp-locale.phpp/class-wp-locale.php/'"
 }
